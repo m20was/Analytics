@@ -18,6 +18,7 @@ The project is pinned to **Python 3.13**.
 - Python 3.13
 - `uv` for environment and dependency management
 - Data libraries: `pandas`, `polars`, `matplotlib`, `plotly`
+- Spark stack: `pyspark`
 - ML/statistics libraries: `scikit-learn`, `statsmodels`
 - App/API libraries: `streamlit`, `fastapi`, `pydantic`
 - LLM tooling: `openai`, `groq`, `langchain`, `langgraph`
