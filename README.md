@@ -1,66 +1,18 @@
 # Analytics Workspace
 
-This README documents how this project was created so the same setup can be reproduced quickly.
+Analytics is a local Python workspace for data exploration, notebook-based learning, and early-stage analytics workflows. The repository currently combines sample datasets, Databricks learning notebooks, and a minimal Python runtime managed with `uv`.
 
-## How I Created This Project
+## Purpose
 
-### 1. Initialized the project with `uv`
+This workspace is suited for:
 
-```bash
-uv init
-```
+- exploratory analysis with `pandas` and `plotly`
+- Spark and Databricks practice with local and notebook-driven exercises
+- experimenting with structured datasets before building production pipelines
 
-This created the base project files:
+The Python application layer is still minimal. The current entrypoint in `main.py` is a placeholder and does not yet implement an analytics workflow.
 
-- `pyproject.toml`
-- `main.py`
-- `README.md`
-- `uv.lock` (after dependency resolution)
-
-### 2. Pinned Python version
-
-I configured the project to use Python 3.12 in `pyproject.toml`:
-
-```toml
-requires-python = ">=3.12,<3.13"
-```
-
-### 3. Created the environment and synced dependencies
-
-```bash
-uv python install 3.12.10
-uv venv --python 3.12.10
-uv sync --python 3.12.10
-```
-
-### 4. Added local environment variables
-
-I created a `.env` file for local Java/Hadoop tooling:
-
-```env
-JAVA_HOME="C:\\Program Files\\Java\\jdk-21.0.11"
-HADOOP_HOME="C:\\hadoop"
-```
-
-### 5. Added project dependencies
-
-Dependencies are managed in `pyproject.toml` and include:
-
-- `fastapi`
-- `groq`
-- `langchain`
-- `langgraph`
-- `langsmith`
-- `pandas`
-- `plotly`
-- `pydantic`
-- `pyspark`
-- `scikit-learn`
-- `streamlit`
-
-I also keep a pinned `requirements.txt` for compatibility.
-
-## Project Layout
+## Repository Structure
 
 ```text
 .
@@ -70,68 +22,107 @@ I also keep a pinned `requirements.txt` for compatibility.
 |-- uv.lock
 |-- .env
 |-- data ingestion/
-|   |-- csv/
-|   |   |-- company_stocks.csv
-|   |   |-- employees_dataset_large.csv
-|   |   |-- employees_dataset_small.csv
-|   |   |-- movies.csv
-|   |   |-- orders.csv
-|   |   |-- weather_data.csv
-|   |   `-- 0_data/ecomm-raw-data/
-|   |       |-- brands/brands.csv
-|   |       |-- category/category.csv
-|   |       |-- customers/customers.csv
-|   |       |-- date/date.csv
-|   |       |-- order_items/landing/*.csv
-|   |       `-- products/products.csv
-|   `-- xlsx/
+|   `-- csv/
+|       |-- company_stocks.csv
+|       |-- employees_dataset_large.csv
+|       |-- employees_dataset_small.csv
+|       |-- movies.csv
+|       |-- movies.xlsx
+|       |-- orders.csv
+|       |-- weather_data.csv
+|       `-- 0_data/ecomm-raw-data/
+|           |-- brands/
+|           |-- category/
+|           |-- customers/
+|           |-- date/
+|           |-- order_items/landing/
+|           `-- products/
 `-- notebooks/
-	|-- sample.ipynb
-	`-- databricks/
-		|-- Fundamentals/
-		`-- project_assets/
+    |-- sample.ipynb
+    `-- databricks/
+        |-- Fundamentals/
+        `-- project_assets/
 ```
 
-## Run the Project
+## Technology Stack
 
-### Load `.env` values (PowerShell)
+- Python 3.12
+- `uv` for environment and dependency management
+- `pandas`, `scikit-learn`, and `plotly` for analysis and visualization
+- `pyspark` for Spark-based data processing
+- `streamlit` and `fastapi` available for future app or service layers
 
-If your shell does not auto-load `.env`, set these before running Spark-related work:
+## Setup
+
+### 1. Install and sync dependencies
+
+```bash
+uv python install 3.12.10
+uv venv --python 3.12.10
+uv sync --python 3.12.10
+```
+
+### 2. Configure local Spark prerequisites
+
+For local Spark work on Windows, set Java and Hadoop locations in your environment. Example PowerShell values:
 
 ```powershell
 $env:JAVA_HOME = "C:\Program Files\Java\jdk-21.0.11"
 $env:HADOOP_HOME = "C:\hadoop"
 ```
 
-### Run the starter script
+If you use a `.env` file locally, keep machine-specific paths there and avoid hard-coding them in notebooks or application code.
+
+## How To Use The Workspace
+
+### Run the Python entrypoint
 
 ```bash
 uv run python main.py
 ```
 
-Expected output:
+Current output:
 
 ```text
 Hello from python!
 ```
 
-### Open notebooks in VS Code
+### Work with notebooks
 
-1. Open any notebook from `notebooks/`.
-2. Select a kernel.
-3. Choose the workspace virtual environment (`.venv`).
+1. Open a notebook under `notebooks/`.
+2. Select the workspace virtual environment as the kernel.
+3. Use the sample CSV files for local exploration or the Databricks notebooks for platform-oriented exercises.
 
-## Recreate This Project From Scratch
+### Work with datasets
 
-If you want to rebuild this exact setup:
+The repository includes two broad dataset groups:
 
-```bash
-uv init
-uv python install 3.12.10
-uv venv --python 3.12.10
-uv sync --python 3.12.10
-```
+- standalone sample files such as stocks, movies, orders, weather, and employee records
+- a more structured e-commerce raw dataset under `data ingestion/csv/0_data/ecomm-raw-data/`
 
-Then create `.env` with your local `JAVA_HOME` and `HADOOP_HOME` values.
+These are appropriate for practice in ingestion, joins, aggregation, and medallion-style transformation exercises.
 
-Then copy or add datasets into `data ingestion/csv/` and notebooks into `notebooks/`.
+## Dependency Management
+
+Project dependencies are declared in `pyproject.toml`, which should be treated as the primary source of truth.
+
+`requirements.txt` is present for compatibility with tools that expect pip-style dependency files. If both files are kept, they should remain aligned.
+
+## Current State
+
+This repository is a solid learning and experimentation workspace, but it is not yet a production-ready analytics project. Notable gaps include:
+
+- no test suite
+- no linting or type-checking configuration
+- no packaged application structure under `src/`
+- placeholder project metadata in `pyproject.toml`
+
+## Recommended Next Steps
+
+To move this workspace closer to standard team-level practice:
+
+1. Replace placeholder project metadata in `pyproject.toml`.
+2. Introduce a `src/` layout for reusable analytics code.
+3. Add `tests/` with `pytest`.
+4. Add formatting and linting with `ruff`.
+5. Separate raw, intermediate, and curated data conventions more explicitly if this evolves into a maintained data project.
