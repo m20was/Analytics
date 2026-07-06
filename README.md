@@ -1,73 +1,109 @@
 # Analytics Workspace
 
-Analytics learning and experimentation workspace with Python scripts, notebooks, and multiple CSV datasets for data engineering, analysis, and forecasting practice.
+This README documents how this project was created so the same setup can be reproduced quickly.
 
-## Project Overview
+## How I Created This Project
 
-This repository contains:
+### 1. Initialized the project with `uv`
 
-- Python environment setup using `uv`
-- Datasets for employees, weather, movies, stock prices, and e-commerce raw data
-- Notebook assets for Spark fundamentals and project exploration
-- A starter Python entry point in `main.py`
+```bash
+uv init
+```
 
-The project is pinned to **Python 3.13**.
+This created the base project files:
 
-## Tech Stack
+- `pyproject.toml`
+- `main.py`
+- `README.md`
+- `uv.lock` (after dependency resolution)
 
-- Python 3.13
-- `uv` for environment and dependency management
-- Data libraries: `pandas`, `polars`, `matplotlib`, `plotly`
-- Spark stack: `pyspark`
-- ML/statistics libraries: `scikit-learn`, `statsmodels`
-- App/API libraries: `streamlit`, `fastapi`, `pydantic`
-- LLM tooling: `openai`, `groq`, `langchain`, `langgraph`
+### 2. Pinned Python version
 
-## Folder Structure
+I configured the project to use Python 3.12 in `pyproject.toml`:
+
+```toml
+requires-python = ">=3.12,<3.13"
+```
+
+### 3. Created the environment and synced dependencies
+
+```bash
+uv python install 3.12.10
+uv venv --python 3.12.10
+uv sync --python 3.12.10
+```
+
+### 4. Added local environment variables
+
+I created a `.env` file for local Java/Hadoop tooling:
+
+```env
+JAVA_HOME="C:\\Program Files\\Java\\jdk-21.0.11"
+HADOOP_HOME="C:\\hadoop"
+```
+
+### 5. Added project dependencies
+
+Dependencies are managed in `pyproject.toml` and include:
+
+- `fastapi`
+- `groq`
+- `langchain`
+- `langgraph`
+- `langsmith`
+- `pandas`
+- `plotly`
+- `pydantic`
+- `pyspark`
+- `scikit-learn`
+- `streamlit`
+
+I also keep a pinned `requirements.txt` for compatibility.
+
+## Project Layout
 
 ```text
 .
 |-- main.py
 |-- pyproject.toml
 |-- requirements.txt
+|-- uv.lock
+|-- .env
 |-- data ingestion/
-|   |-- company_stocks.csv
-|   |-- employees_dataset_large.csv
-|   |-- employees_dataset_small.csv
-|   |-- movies.csv
-|   |-- orders.csv
-|   |-- weather_data.csv
-|   `-- 0_data/ecomm-raw-data/
-|       |-- brands/brands.csv
-|       |-- category/category.csv
-|       |-- customers/customers.csv
-|       |-- date/date.csv
-|       |-- order_items/landing/*.csv
-|       `-- products/products.csv
-|-- notebooks/
-|   |-- sample.ipynb
-|   `-- databricks/
-|       |-- Fundamentals/
-|       `-- project_assets/
-`-- sql/
+|   |-- csv/
+|   |   |-- company_stocks.csv
+|   |   |-- employees_dataset_large.csv
+|   |   |-- employees_dataset_small.csv
+|   |   |-- movies.csv
+|   |   |-- orders.csv
+|   |   |-- weather_data.csv
+|   |   `-- 0_data/ecomm-raw-data/
+|   |       |-- brands/brands.csv
+|   |       |-- category/category.csv
+|   |       |-- customers/customers.csv
+|   |       |-- date/date.csv
+|   |       |-- order_items/landing/*.csv
+|   |       `-- products/products.csv
+|   `-- xlsx/
+`-- notebooks/
+	|-- sample.ipynb
+	`-- databricks/
+		|-- Fundamentals/
+		`-- project_assets/
 ```
 
-## Prerequisites
+## Run the Project
 
-- `uv` installed and available in `PATH`
-- Python 3.13 available to `uv`
+### Load `.env` values (PowerShell)
 
-## Setup
+If your shell does not auto-load `.env`, set these before running Spark-related work:
 
-From the project root:
-
-```bash
-uv python install 3.13
-uv venv --python 3.13
-uv sync --python 3.13
+```powershell
+$env:JAVA_HOME = "C:\Program Files\Java\jdk-21.0.11"
+$env:HADOOP_HOME = "C:\hadoop"
 ```
 
-## Run the Starter Script
+### Run the starter script
 
 ```bash
 uv run python main.py
@@ -79,42 +115,23 @@ Expected output:
 Hello from python!
 ```
 
-## Use Notebooks in VS Code
+### Open notebooks in VS Code
 
-1. Open a notebook under `notebooks/`.
-2. Select **Kernel**.
-3. Choose `.venv (Workspace)`.
+1. Open any notebook from `notebooks/`.
+2. Select a kernel.
+3. Choose the workspace virtual environment (`.venv`).
 
-## Verify Environment
+## Recreate This Project From Scratch
 
-```bash
-.venv\\Scripts\\python.exe --version
-```
-
-Expected output starts with:
-
-```text
-Python 3.13
-```
-
-## Dependency Management
-
-- Main dependency source: `pyproject.toml`
-- `requirements.txt` is also present for compatibility/reference.
-
-To add a package:
+If you want to rebuild this exact setup:
 
 ```bash
-uv add <package-name>
+uv init
+uv python install 3.12.10
+uv venv --python 3.12.10
+uv sync --python 3.12.10
 ```
 
-To sync dependencies after pulling changes:
+Then create `.env` with your local `JAVA_HOME` and `HADOOP_HOME` values.
 
-```bash
-uv sync
-```
-
-## Notes
-
-- CSV files in `data ingestion/0_data/ecomm-raw-data/order_items/landing/` are partitioned by date and useful for incremental ingestion exercises.
-- The `sql/` directory is available for query scripts and data modeling work.
+Then copy or add datasets into `data ingestion/csv/` and notebooks into `notebooks/`.
