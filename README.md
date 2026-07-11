@@ -1,6 +1,6 @@
 # Analytics Workspace
 
-Analytics is a notebook-first learning workspace for data exploration, Python practice, and Spark exercises. The repository combines sample datasets, Databricks learning notebooks, and a lightweight `uv`-managed environment.
+Analytics is a notebook-first learning workspace for data exploration, Python practice, Spark exercises, and small app projects. The repository combines sample datasets, Databricks learning notebooks, a lightweight `uv`-managed environment, and multiple app folders that share the same dependencies.
 
 ## Purpose
 
@@ -10,7 +10,7 @@ This workspace is suited for:
 - Spark and Databricks practice with local and notebook-driven exercises
 - experimenting with structured datasets through notebooks and small scripts
 
-The Python layer is intentionally lightweight. Add small standalone scripts under `scripts/` whenever a notebook task becomes easier to repeat from the terminal.
+The Python layer is intentionally lightweight. Add small standalone scripts under `scripts/` whenever a notebook task becomes easier to repeat from the terminal, and put app-specific code under `apps/`.
 
 ## Repository Structure
 
@@ -19,6 +19,15 @@ The Python layer is intentionally lightweight. Add small standalone scripts unde
 |-- pyproject.toml
 |-- uv.lock
 |-- .env
+|-- apps/
+|   |-- project1/
+|   |   |-- backend/
+|   |   |-- frontend/
+|   |   `-- README.md
+|   `-- project2/
+|       `-- app.py
+|-- src/
+|   `-- shared/
 |-- scripts/
 |-- data/
 |   |-- raw/
@@ -49,6 +58,8 @@ The Python layer is intentionally lightweight. Add small standalone scripts unde
 The main working areas are:
 
 - `notebooks/` for experiments, walkthroughs, and practice exercises
+- `apps/` for small runnable projects such as Streamlit apps and FastAPI backends
+- `src/shared/` for code reused by more than one app
 - `scripts/` for simple reusable `.py` files
 - `data/` for raw samples and any generated learning outputs
 
@@ -100,8 +111,10 @@ uv run python scripts/<name>.py
 ### Add future Python files
 
 1. Put small learning scripts in `scripts/`.
-2. Use clear names such as `clean_orders.py` or `plot_weather.py`.
-3. Run them with `uv run python scripts/<name>.py`.
+2. Put app entrypoints in `apps/<project-name>/`.
+3. Put shared helpers in `src/shared/`.
+4. Use clear names such as `clean_orders.py`, `app.py`, or `plot_weather.py`.
+5. Run scripts with `uv run python scripts/<name>.py` and apps with the appropriate framework command.
 
 ### Work with datasets
 
@@ -136,7 +149,7 @@ The structure is optimized for learning first: notebooks, datasets, and standalo
 
 Useful next steps for this workspace:
 
-1. Add short README notes for each notebook collection you care about most.
-2. Add small scripts under `scripts/` as recurring tasks appear.
+1. Add short README notes for each app folder as the projects grow.
+2. Keep shared code in `src/shared/` instead of duplicating it across apps.
 3. Keep raw data untouched and write experiments into `data/intermediate/` or `data/curated/`.
-4. Introduce tests and a package layout only if the scripts start becoming shared utilities.
+4. Introduce tests for the shared package and the app entrypoints as they stabilize.
