@@ -1,155 +1,107 @@
 # Analytics Workspace
 
-Analytics is a notebook-first learning workspace for data exploration, Python practice, Spark exercises, and small app projects. The repository combines sample datasets, Databricks learning notebooks, a lightweight `uv`-managed environment, and multiple app folders that share the same dependencies.
+This repository is a learning workspace for notebooks and small Python projects.
 
-## Purpose
+Use this README as a setup and run guide.
 
-This workspace is suited for:
+## What You Can Run
 
-- exploratory analysis with `pandas` and `plotly`
-- Spark and Databricks practice with local and notebook-driven exercises
-- experimenting with structured datasets through notebooks and small scripts
+- notebooks in `notebooks/` (Python and visualization practice)
+- FastAPI backend in `apps/project1/backend/`
+- Streamlit frontend in `apps/project1/frontend/`
+- Streamlit app in `apps/project2/`
 
-The Python layer is intentionally lightweight. Add small standalone scripts under `scripts/` whenever a notebook task becomes easier to repeat from the terminal, and put app-specific code under `apps/`.
+## Prerequisites
 
-## Repository Structure
-
-```text
-.
-|-- pyproject.toml
-|-- uv.lock
-|-- .env
-|-- apps/
-|   |-- project1/
-|   |   |-- backend/
-|   |   |-- frontend/
-|   |   `-- README.md
-|   `-- project2/
-|       `-- app.py
-|-- src/
-|   `-- shared/
-|-- scripts/
-|-- data/
-|   |-- raw/
-|   |   |-- samples/
-|   |   |   |-- finance/company_stocks.csv
-|   |   |   |-- hr/employees_dataset_large.csv
-|   |   |   |-- hr/employees_dataset_small.csv
-|   |   |   |-- media/movies.csv
-|   |   |   |-- media/movies.xlsx
-|   |   |   |-- retail/orders.csv
-|   |   |   `-- weather/weather_data.csv
-|   |   `-- ecommerce/
-|   |       |-- brands/
-|   |       |-- category/
-|   |       |-- customers/
-|   |       |-- date/
-|   |       |-- order_items/landing/
-|   |       `-- products/
-|   |-- intermediate/
-|   `-- curated/
-`-- notebooks/
-    |-- sample.ipynb
-    `-- databricks/
-        |-- Fundamentals/
-        `-- project_assets/
-```
-
-The main working areas are:
-
-- `notebooks/` for experiments, walkthroughs, and practice exercises
-- `apps/` for small runnable projects such as Streamlit apps and FastAPI backends
-- `src/shared/` for code reused by more than one app
-- `scripts/` for simple reusable `.py` files
-- `data/` for raw samples and any generated learning outputs
-
-## Technology Stack
-
+- Windows PowerShell or Command Prompt
 - Python 3.12
-- `uv` for environment and dependency management
-- `pandas`, `scikit-learn`, and `plotly` for analysis and visualization
-- `pyspark` for Spark-based data processing
-- optional extra libraries already installed for future experiments
+- `uv` installed
 
-## Setup
-
-### 1. Install and sync dependencies
-
-```bash
-uv python install 3.12.10
-uv venv --python 3.12.10
-uv sync --python 3.12.10
-```
-
-### 2. Configure local Spark prerequisites
-
-For local Spark work on Windows, set Java and Hadoop locations in your environment. Example PowerShell values:
+If `uv` is not installed yet:
 
 ```powershell
-$env:JAVA_HOME = "C:\Program Files\Java\jdk-21.0.11"
+pip install uv
+```
+
+## Setup Workspace (First Time)
+
+Run these commands from the repository root:
+
+```powershell
+uv python install 3.12.10
+uv venv --python 3.12.10
+uv sync
+```
+
+What this does:
+
+1. Installs Python 3.12.10 (if missing).
+2. Creates `.venv` in this workspace.
+3. Installs all dependencies from `pyproject.toml`.
+
+## Open And Run Notebooks
+
+1. Open any notebook from `notebooks/`.
+2. Select the kernel from this workspace virtual environment (`.venv`).
+3. Run cells normally.
+
+If dependencies changed in `pyproject.toml`, run:
+
+```powershell
+uv sync
+```
+
+### Optional Spark Environment (only for local Spark notebooks)
+
+For PySpark notebooks on Windows, set Java and Hadoop paths before running cells:
+
+```powershell
+$env:JAVA_HOME = "C:\Program Files\Java\jdk-21"
 $env:HADOOP_HOME = "C:\hadoop"
 ```
 
-If you use a `.env` file locally, keep machine-specific paths there and avoid hard-coding them in notebooks or application code.
+## Run Projects
 
-## How To Use The Workspace
+### Project 1 Backend (FastAPI)
 
-### Run Python files
-
-Put standalone learning scripts in `scripts/` and run them with:
-
-```bash
-uv run python scripts/<name>.py
+```powershell
+uv run python -m uvicorn apps.project1.backend.main:app --reload
 ```
 
-### Work with notebooks
+Health check URL:
 
-1. Open a notebook under `notebooks/`.
-2. Select the workspace virtual environment as the kernel.
-3. Use the sample CSV files for local exploration or the Databricks notebooks for platform-oriented exercises.
+- `http://127.0.0.1:8000/health`
 
-### Add future Python files
+### Project 1 Frontend (Streamlit)
 
-1. Put small learning scripts in `scripts/`.
-2. Put app entrypoints in `apps/<project-name>/`.
-3. Put shared helpers in `src/shared/`.
-4. Use clear names such as `clean_orders.py`, `app.py`, or `plot_weather.py`.
-5. Run scripts with `uv run python scripts/<name>.py` and apps with the appropriate framework command.
+```powershell
+uv run streamlit run apps/project1/frontend/app.py
+```
 
-### Work with datasets
+### Project 2 (Streamlit)
 
-The repository includes:
+```powershell
+uv run streamlit run apps/project2/app.py
+```
 
-- domain-grouped sample files under `data/raw/samples/`
-- a structured e-commerce raw dataset under `data/raw/ecommerce/`
-- generated practice outputs under `data/intermediate/` or `data/curated/` when your scripts write them
+## Typical Daily Workflow
 
-See `data/README.md` for the expected purpose of each data stage.
+1. Pull latest changes.
+2. Run `uv sync`.
+3. Start notebook or app command.
 
-These are appropriate for practice in ingestion, joins, aggregation, and medallion-style transformation exercises.
+## Where Files Belong
+
+- `notebooks/`: experiments and lessons
+- `apps/`: runnable apps
+- `scripts/`: standalone Python scripts
+- `src/shared/`: shared helpers across apps
+- `data/`: raw/intermediate/curated datasets
 
 ## Dependency Management
 
-Project dependencies are declared in `pyproject.toml`, which is the source of truth for this workspace.
+- Add a new package: `uv add <package-name>`
+- Remove a package: `uv remove <package-name>`
+- Reinstall/sync all packages: `uv sync`
 
-The lockfile in `uv.lock` should be kept in sync with dependency changes for reproducible environments.
-
-## Current State
-
-This repository is a learning workspace, not a production project. That is intentional. Current limitations include:
-
-- no automated tests
-- no CI pipeline
-- no type-checking step
-- data lifecycle folders are present, but naming and ownership conventions are still lightweight
-
-The structure is optimized for learning first: notebooks, datasets, and standalone scripts.
-
-## Recommended Next Steps
-
-Useful next steps for this workspace:
-
-1. Add short README notes for each app folder as the projects grow.
-2. Keep shared code in `src/shared/` instead of duplicating it across apps.
-3. Keep raw data untouched and write experiments into `data/intermediate/` or `data/curated/`.
-4. Introduce tests for the shared package and the app entrypoints as they stabilize.
+`pyproject.toml` is the source of truth for dependencies.
