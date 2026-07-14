@@ -97,6 +97,30 @@ uv run streamlit run apps/project2/app.py
 - `scripts/`: standalone Python scripts
 - `src/shared/`: shared helpers across apps
 - `data/`: raw/intermediate/curated datasets
+- `sql/`: SQL files organised by database (see `sql/README.md`)
+
+## SQL Projects
+
+SQL files live under `sql/`, one folder per database:
+
+```
+sql/
+├── awesome_chocolates/
+│   ├── ddl/tables · ddl/views · ddl/indexes
+│   ├── dml/seeds · dml/migrations
+│   ├── queries/analysis · queries/reports
+│   ├── stored_procedures · functions · triggers
+│   └── migrations/
+├── geeksforgeeks/
+│   ├── ddl/tables/01_create_tables.sql
+│   ├── dml/seeds/02_seed_scott_data.sql
+│   ├── queries/analysis/03_queries.sql
+│   └── …
+└── _templates/           ← copy when adding a new database
+```
+
+**Database:** MySQL running locally on `127.0.0.1:3306`
+**VS Code extension:** Database Client (cweijan) — use the cylinder icon in the Activity Bar to browse tables and run `.sql` files.
 
 ## Dependency Management
 
