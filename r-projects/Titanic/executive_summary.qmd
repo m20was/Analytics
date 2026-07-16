@@ -1,0 +1,16 @@
+---
+title: "Executive Summary"
+format: html
+---
+
+## Overview
+
+Summary of key findings.
+
+## Key Takeaways
+
+-
+
+## Recommendations
+
+-

@@ -1,0 +1,28 @@
+---
+title: "Analysis"
+format: html
+---
+
+## Setup
+
+```{r setup}
+library(tidyverse)
+```
+
+## Load Data
+
+```{r load-data}
+# df <- read_csv("data/raw.csv")
+```
+
+## Exploration
+
+```{r explore}
+
+```
+
+## Analysis
+
+```{r analysis}
+
+```
