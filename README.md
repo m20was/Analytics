@@ -6,7 +6,7 @@ Use this README as a setup and run guide.
 
 ## What You Can Run
 
-- notebooks in `notebooks/` (Python and visualization practice)
+- notebooks in `notebooks/` (Python, Plotly, and Seaborn visualization practice)
 - FastAPI backend in `apps/project1/backend/`
 - Streamlit frontend in `apps/project1/frontend/`
 - Streamlit app in `apps/project2/`
