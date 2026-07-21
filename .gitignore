@@ -16,3 +16,9 @@ wheels/
 # Generated learning outputs
 data/intermediate/profiles/*.json
 data/curated/profiles/*.json
+
+# Ignore local Obsidian UI layout configurations
+obsidian_notes/m20was/.obsidian/workspace.json
+obsidian_notes/m20was/.obsidian/workspace-mobile.json
+obsidian_notes/m20was/.obsidian/cache/
+obsidian_notes/m20was/.trash/
