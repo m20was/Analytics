@@ -16,9 +16,13 @@ wheels/
 # Generated learning outputs
 data/intermediate/profiles/*.json
 data/curated/profiles/*.json
-
 # Ignore local Obsidian UI layout configurations
-obsidian_notes/m20was/.obsidian/workspace.json
-obsidian_notes/m20was/.obsidian/workspace-mobile.json
-obsidian_notes/m20was/.obsidian/cache/
-obsidian_notes/m20was/.trash/
+markdown/m20was/.obsidian/workspace.json
+markdown/m20was/.obsidian/workspace-mobile.json
+markdown/m20was/.obsidian/graph.json
+markdown/m20was/.obsidian/backlink.json
+markdown/m20was/.obsidian/cache/
+markdown/m20was/.obsidian/.trash/
+
+# Optional: Ignore all plugin data configurations if they contain private access tokens
+markdown/m20was/.obsidian/plugins/*/data.json
