@@ -69,13 +69,13 @@ void main() {
 # Java 25 Console Reading Alternative (`IO.readln()`)
 
 In Java 25, `IO.readln()` provides a clean alternative without declaring `Scanner`:
-No, `IO.readln()` **cannot take any data type directly**. It has one fixed rule: it **always returns a `String`**
 ```java
 void main() {
     var name = IO.readln("Enter name: ");
     IO.println("Hello, " + name + "!");
 }
 ```
+No, `IO.readln()` **cannot take any data type directly**. It has one fixed rule: it **always returns a `String`**
 
 ---
 
@@ -176,8 +176,8 @@ record Point(int x, int y) {}
 void processShape(Object obj) {
     switch (obj) {
         case Point(int x, int y) when x == 0 && y == 0 -> IO.println("At Origin (0,0)");
-        case Point(int x, int y)                        -> IO.println("Point at (" + x + "," + y + ")");
-        default                                         -> IO.println("Not a point");
+        case Point(int x, int y) -> IO.println("Point at (" + x + "," + y + ")");
+        case null, default -> IO.println("Not a point or null"); 
     }
 }
 ```
