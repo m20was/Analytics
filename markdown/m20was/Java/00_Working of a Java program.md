@@ -21,10 +21,22 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    A[Hello.java Source File] -->|Compiler javac| B[Hello.class Bytecode]
-    B -->|JVM| C[Native Machine Code]
-    C --> D[Windows OS]
-    C --> E[macOS]
+    subgraph Source["Source Code"]
+        A["Hello.java\n(Source File)"]
+    end
+
+    subgraph BytecodeStage["Bytecode"]
+        B["Hello.class\n(010101 Bytecode)"]
+    end
+
+    subgraph MachineStage["Machine Code"]
+        C["Native Machine Code\n(010101)"]
+    end
+
+    A -->|Compiler| B
+    B -->|JVM| C
+    C --> Windows["Windows OS"]
+    C --> MacOS["macOS"]
 ```
 
 ## Overview & Concept
@@ -41,18 +53,18 @@ flowchart LR
 ## Architecture Diagram
 
 ```mermaid
-graph TD
-    JDK[JDK - Java Development Kit]
-    JRE[JRE - Java Runtime Environment]
-    JVM[JVM - Java Virtual Machine]
-    Libs[Java Class Libraries]
-    Tools[Dev Tools: javac, JavaDoc, Debugger]
-
-    JDK -->|Contains| JRE
-    JDK -->|Contains| Tools
-    JRE -->|Contains| JVM
-    JRE -->|Contains| Libs
+flowchart TB
+    subgraph JDK ["JDK (Java Development Kit)"]
+        direction TB
+        subgraph JRE ["JRE (Java Runtime Environment)"]
+            direction TB
+            JVM["JVM (Java Virtual Machine)"]
+            Libraries["Java Class Libraries & Components"]
+        end
+        DevTools["Development Tools (javac, JavaDoc, Debugger, etc.)"]
+    end
 ```
+
 
 
 ## Core Definitions
