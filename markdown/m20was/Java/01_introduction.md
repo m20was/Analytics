@@ -1,13 +1,11 @@
-
 # What is a programming language?
 
-**Timestamp:** 1:11
 
 ## Overview
 A **programming language** is the primary medium through which humans provide instructions to a computer. 
 
 ## Key Concepts
-- **Machine-Level Instructions:** Computers inherently only understand machine-level instructions (binary/0s and 1s).
+- **Machine-Level Instructions:** Computers inherently only understand machine-level instructions ([[03_binary_number_system|binary/0s and 1s]]).
 - **The Bridge:** Programming languages act as a bridge between human-readable logic/code and machine-executable instructions, allowing developers to write code that the machine can process and execute effectively.
 
 ## Visual Diagram
@@ -21,8 +19,6 @@ flowchart LR
 ---
 
 # Working of a Java Program
-
-**Timestamp:** 2:56
 
 ## Diagram
 
@@ -47,15 +43,13 @@ flowchart LR
 ```
 
 ## Overview & Execution Flow
-1. **Source Code:** Written by developers in human-readable `.java` files.
+1. **Source Code:** Written by developers in human-readable `.java` files containing [[02_variables_and_data_types|Variables and Data Types]].
 2. **Compilation Process:** The Java source code is compiled by the Java compiler (`javac`) into platform-independent **bytecode** (`Hello.class` files).
 3. **Execution/Interpretation:** The Java Runtime Environment (JRE) / Java Virtual Machine (JVM) interprets or executes the bytecode to perform the desired tasks on the underlying system, allowing it to run across target OS environments like Windows and macOS.
 
 ---
 
 # JVM, JRE and JDK
-
-**Timestamp:** 6:14
 
 ## Architecture Diagram
 
@@ -98,20 +92,24 @@ In modern Java IDEs (like IntelliJ IDEA and Eclipse), you can use shorthand trig
 
 | Shortcut | Triggers | Generated Code |
 | :--- | :--- | :--- |
-| `psvm` + `Tab` / `main` + `Tab` | `public static void main(String[] args)` | Generates the main entry point method. |
-| `sout` + `Tab` | `System.out.println();` | Prints output to the standard console with a newline. |
-| `souf` + `Tab` | `System.out.printf("");` | Formatted output print statement. |
-| `soutm` + `Tab` | `System.out.println("Class.method");` | Prints current class and method name (great for debugging). |
-| `soutv` + `Tab` | `System.out.println("var = " + var);` | Prints a variable's name and its value. |
-| `fori` + `Tab` | `for (int i = 0; i < ; i++) {}` | Standard indexed `for` loop. |
+| `main` + `Tab` | `void main()` | Generates modern Java 25+ entry point [[08_methods_and_math|method]]. |
+| `sout` + `Tab` | `IO.println();` / `println();` | Compact print output using Java 25 module IO (`import static java.lang.IO.*;`). |
+| `souf` + `Tab` | `IO.print();` / `print();` | Formatted output print statement. |
+| `soutm` + `Tab` | `println("Class.method");` | Prints current [[10_oop_basics_and_inheritance|class]] and [[08_methods_and_math|method]] name. |
+| `soutv` + `Tab` | `println("var = " + var);` | Prints a [[02_variables_and_data_types|variable's]] name and its value. |
+| `fori` + `Tab` | `for (var i = 0; i < n; i++) {}` | Standard indexed [[06_loops_and_patterns|for loop]] with `var`. |
 
-### Example Usage:
-Instead of manually typing out:
+### Modern Java 25 Code Example:
+In Java 25, **Module Import Declarations** (`import module java.base;`) and **Implicit IO** allow replacing verbose `System.out.println` with clean `println()` / `IO.println()`:
+
 ```java
-public static void main(String[] args) {
-    System.out.println("Hello, World!");
+// Java 25 Clean Compact Syntax
+import static java.lang.IO.*;
+
+void main() {
+    println("Hello, World!");
 }
 ```
 Simply type:
-1. `psvm` ➔ press <kbd>Tab</kbd>
+1. `main` ➔ press <kbd>Tab</kbd>
 2. `sout` ➔ press <kbd>Tab</kbd>

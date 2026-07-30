@@ -1,8 +1,8 @@
 # Java Keywords
 
 ## Overview
-Java keywords are reserved words that have predefined meanings in Java. They cannot be used as identifiers (such as variable names, class names, or method names). 
 
+Java keywords are reserved words that have predefined meanings in Java. They cannot be used as identifiers (such as [[02_variables_and_data_types|variable names]], [[10_oop_basics_and_inheritance|class names]], or [[08_methods_and_math|method names]]). 
 > **Note:** Over 90% of these keywords will be covered and used extensively throughout Java programming.
 
 ---
@@ -38,8 +38,9 @@ flowchart LR
 
 ### Code Example:
 ```java
-int age = 4;    // Creates a variable named 'age' storing value 4
-int x = 14;     // Variable 'x' storing value 14
+// Traditional Primitive Declarations vs. Modern Java Local Variable Type Inference (var)
+int age = 4;    // Creates an integer variable named 'age' storing value 4
+var x = 14;     // Java automatically infers type 'int' for 'x'
 ```
 
 ---
@@ -48,25 +49,25 @@ int x = 14;     // Variable 'x' storing value 14
 
 1. **Case-Sensitive:** Java is case-sensitive. Hence, `age` and `AGE` are treated as two completely different variables.
    ```java
-   int age = 20;
-   int AGE = 30; // Valid, but different from 'age'
+   var age = 20;
+   var AGE = 30; // Valid, but different from 'age'
    ```
 2. **Starting Characters:** Variables must start with either a letter, an underscore (`_`), or a dollar sign (`$`).
    ```java
-   int age = 25;    // Valid
-   int _count = 5;  // Valid
-   int $price = 100;// Valid
-   // int 123age = 10; // INVALID (Cannot start with a digit)
+   var age = 25;    // Valid
+   var _count = 5;  // Valid
+   var $price = 100;// Valid
+   // var 123age = 10; // INVALID (Cannot start with a digit)
    ```
 3. **No Whitespace:** Variable names cannot contain whitespace/spaces.
    ```java
-   // int my age = 20; // INVALID
-   int myAge = 20;     // Valid (CamelCase recommended)
+   // var my age = 20; // INVALID
+   var myAge = 20;     // Valid (CamelCase recommended)
    ```
 4. **No Reserved Keywords:** Variable names cannot be a Java keyword.
    ```java
-   // int class = 10; // INVALID ('class' is a reserved keyword)
-   int myClass = 10;   // Valid
+   // var class = 10; // INVALID ('class' is a reserved keyword)
+   var myClass = 10;   // Valid
    ```
 
 ---
@@ -123,6 +124,8 @@ flowchart TD
 ### Code Example:
 ```java
 int numInt = 100;
-long numLong = numInt;    // Implicit widening: int (4 bytes) automatically converts to long (8 bytes)
-double numDouble = numLong;// Implicit widening: long (8 bytes) automatically converts to double
+long numLong = numInt;      // Implicit widening: int (4 bytes) automatically converts to long (8 bytes)
+double numDouble = numLong; // Implicit widening: long (8 bytes) automatically converts to double
+var result = numDouble + 5; // Inferred as double
 ```
+
