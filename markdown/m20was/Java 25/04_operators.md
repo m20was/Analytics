@@ -31,11 +31,14 @@ Arithmetic operators perform basic mathematical calculations.
 
 ### Code Example:
 ```java
-int a = 10;
-int b = 3;
-System.out.println("Sum: " + (a + b));      // 13
-System.out.println("Remainder: " + (a % b));// 1
+void main() {
+    var a = 10;
+    var b = 3;
+    println("Sum: " + (a + b));       // 13
+    println("Remainder: " + (a % b)); // 1
+}
 ```
+
 
 ---
 

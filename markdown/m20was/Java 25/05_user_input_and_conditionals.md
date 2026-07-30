@@ -13,17 +13,16 @@ In modern Java (Java 21 to Java 25+), we can write clean, top-level code using *
 | `nextLine()` | An entire line of text (string) |
 | `nextBoolean()` | A boolean value (`true`/`false`) |
 
-### Modern Java Code Example (Java 21-25+):
+### Modern Java 25 Code Example:
 ```java
-// Java 21-25+ Modern Main Method (Implicit class & try-with-resources)
 import java.util.Scanner;
 
 void main() {
     try (var sc = new Scanner(System.in)) {
-        System.out.print("Enter your age: ");
-        int age = sc.nextInt();
+        print("Enter your age: ");
+        var age = sc.nextInt();
 
-        System.out.println("You are " + age + " years old.");
+        println("You are " + age + " years old.");
     } // Scanner is automatically closed here via try-with-resources
 }
 ```
@@ -49,15 +48,15 @@ flowchart TD
 
 Executes one block of code if the condition is `true`, and an alternative block if it is `false`.
 
-### Modern Code Example (using `var` local variable type inference):
+### Modern Java 25 Code Example:
 ```java
 void main() {
     var number = 10;
 
     if (number % 2 == 0) {
-        System.out.println("Even number");
+        println("Even number");
     } else {
-        System.out.println("Odd number");
+        println("Odd number");
     }
 }
 ```
@@ -68,19 +67,19 @@ void main() {
 
 Used to test multiple conditions sequentially.
 
-### Modern Code Example:
+### Modern Java 25 Code Example:
 ```java
 void main() {
     var score = 85;
 
     if (score >= 90) {
-        System.out.println("Grade: A");
+        println("Grade: A");
     } else if (score >= 80) {
-        System.out.println("Grade: B");
+        println("Grade: B");
     } else if (score >= 70) {
-        System.out.println("Grade: C");
+        println("Grade: C");
     } else {
-        System.out.println("Grade: F");
+        println("Grade: F");
     }
 }
 ```
@@ -91,7 +90,7 @@ void main() {
 
 An `if` or `if-else` statement placed inside another `if` or `else` block.
 
-### Modern Code Example:
+### Modern Java 25 Code Example:
 ```java
 void main() {
     var age = 20;
@@ -99,12 +98,12 @@ void main() {
 
     if (age >= 18) {
         if (hasID) {
-            System.out.println("Entry Allowed");
+            println("Entry Allowed");
         } else {
-            System.out.println("ID required");
+            println("ID required");
         }
     } else {
-        System.out.println("Underage - Entry Denied");
+        println("Underage - Entry Denied");
     }
 }
 ```
@@ -118,12 +117,12 @@ A compact, single-line shorthand for an `if-else` block.
 ### Syntax:
 $$\text{variable} = (\text{condition}) ? \text{expressionIfTrue} : \text{expressionIfFalse};$$
 
-### Modern Code Example:
+### Modern Java 25 Code Example:
 ```java
 void main() {
     var number = 7;
     var result = (number % 2 == 0) ? "Even" : "Odd";
-    System.out.println(result); // Outputs: Odd
+    println(result); // Outputs: Odd
 }
 ```
 
@@ -152,7 +151,7 @@ flowchart TD
 void main() {
     var day = 3;
 
-    // Modern Switch Expression (Java 14+) assigning directly to variable
+    // Modern Switch Expression assigning directly to variable
     var dayName = switch (day) {
         case 1 -> "Monday";
         case 2 -> "Tuesday";
@@ -161,7 +160,7 @@ void main() {
         default -> "Weekend / Invalid day";
     };
 
-    System.out.println(dayName); // Outputs: Wednesday
+    println(dayName); // Outputs: Wednesday
 }
 ```
 
@@ -172,10 +171,10 @@ void main() {
 
     // Modern arrow rules without returning a value
     switch (day) {
-        case 1 -> System.out.println("Monday");
-        case 2 -> System.out.println("Tuesday");
-        case 3 -> System.out.println("Wednesday");
-        default -> System.out.println("Other day");
+        case 1 -> println("Monday");
+        case 2 -> println("Tuesday");
+        case 3 -> println("Wednesday");
+        default -> println("Other day");
     }
 }
 ```
