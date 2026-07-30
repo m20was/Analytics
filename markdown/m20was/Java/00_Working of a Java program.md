@@ -65,8 +65,6 @@ flowchart TB
     end
 ```
 
-
-
 ## Core Definitions
 
 ### JVM (Java Virtual Machine)
