@@ -41,8 +41,6 @@ flowchart LR
 
 ## Overview & Concept
 
-**JVM (Java Virtual Machine):** JVM is an abstract machine that enables your computer to run a Java program.
-
 ## Execution Flow & Key Concepts
 1. **Source Code:** Written by developers in human-readable `.java` files.
 2. **Compilation Process:** The Java source code is compiled by the Java compiler (`javac`) into platform-independent **bytecode** (`Hello.class` files).
@@ -55,17 +53,22 @@ flowchart LR
 ## Architecture Diagram
 
 ```mermaid
-flowchart TD
-    subgraph JDK["JDK (Java Development Kit)"]
-        subgraph JRE["JRE (Java Runtime Environment)"]
+flowchart TB
+    subgraph JDK ["JDK (Java Development Kit)"]
+        direction TB
+        subgraph JRE ["JRE (Java Runtime Environment)"]
+            direction TB
             JVM["JVM (Java Virtual Machine)"]
             Libraries["Java Class Libraries & Components"]
         end
-        DevTools["Development Tools\n(Compilers, JavaDoc, Java Debugger, etc.)"]
+        DevTools["Development Tools (javac, JavaDoc, Debugger, etc.)"]
     end
 ```
 
 ## Core Definitions
+
+### JVM (Java Virtual Machine)
+**JVM** is an abstract machine that enables your computer to run a Java program.
 
 ### JRE (Java Runtime Environment)
 **JRE** is a software package that provides:
@@ -79,3 +82,29 @@ In addition to the **JRE**, the JDK contains a number of development tools:
 - **Compiler** (`javac`)
 - **JavaDoc**
 - **Java Debugger** (`jdb`), etc.
+
+---
+
+# Useful Java IDE Typing Shortcuts (Live Templates)
+
+In modern Java IDEs (like IntelliJ IDEA and Eclipse), you can use shorthand triggers followed by `Tab` or `Enter` to auto-generate boilerplate code quickly:
+
+| Shortcut | Triggers | Generated Code |
+| :--- | :--- | :--- |
+| `psvm` + `Tab` / `main` + `Tab` | `public static void main(String[] args)` | Generates the main entry point method. |
+| `sout` + `Tab` | `System.out.println();` | Prints output to the standard console with a newline. |
+| `souf` + `Tab` | `System.out.printf("");` | Formatted output print statement. |
+| `soutm` + `Tab` | `System.out.println("Class.method");` | Prints current class and method name (great for debugging). |
+| `soutv` + `Tab` | `System.out.println("var = " + var);` | Prints a variable's name and its value. |
+| `fori` + `Tab` | `for (int i = 0; i < ; i++) {}` | Standard indexed `for` loop. |
+
+### Example Usage:
+Instead of manually typing out:
+```java
+public static void main(String[] args) {
+    System.out.println("Hello, World!");
+}
+```
+Simply type:
+1. `psvm` ➔ press <kbd>Tab</kbd>
+2. `sout` ➔ press <kbd>Tab</kbd>
