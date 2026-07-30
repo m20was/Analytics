@@ -1,13 +1,6 @@
 # Java Keywords
 
-## Overview
-
-Java keywords are reserved words that have predefined meanings in Java. They cannot be used as identifiers (such as [[02_variables_and_data_types|variable names]], [[10_oop_basics_and_inheritance|class names]], or [[08_methods_and_math|method names]]). 
-> **Note:** Over 90% of these keywords will be covered and used extensively throughout Java programming.
-
----
-
-## Complete List of Java Keywords
+Java keywords are reserved words that cannot be used as identifiers (variable names, class names, or method names).
 
 | `abstract` | `continue` | `for`        | `new`       | `switch`       |
 | :--------- | :--------- | :----------- | :---------- | :------------- |
@@ -21,111 +14,57 @@ Java keywords are reserved words that have predefined meanings in Java. They can
 | `class`    | `finally`  | `long`       | `strictfp`  | `volatile`     |
 | `const`    | `float`    | `native`     | `super`     | `while`        |
 
-> *Note:* `const` and `goto` are reserved keywords in Java, but they are currently not used.
+> *Note:* `const` and `goto` are reserved but unused.
 
 ---
 
 # Java Variables
 
-## Concept & Memory Analogy
-A **variable** is a named container/location in memory that holds a value during program execution.
+A **variable** is a named memory location holding a value.
 
 ```mermaid
 flowchart LR
-    A[Variable: age] -->|Points to Memory Address| B[Value: 4]
+    A[Variable: age] -->|Memory Address| B[Value: 4]
     B -->|Allocates| C[4 Bytes in RAM]
 ```
 
-### Code Example:
 ```java
-// Traditional Primitive Declarations vs. Modern Java Local Variable Type Inference (var)
-int age = 4;    // Creates an integer variable named 'age' storing value 4
-var x = 14;     // Java automatically infers type 'int' for 'x'
+int age = 4; // Explicit primitive declaration
+var x = 14;  // Inferred as int via var
 ```
 
----
-
-## Rules for Naming Variables in Java
-
-1. **Case-Sensitive:** Java is case-sensitive. Hence, `age` and `AGE` are treated as two completely different variables.
-   ```java
-   var age = 20;
-   var AGE = 30; // Valid, but different from 'age'
-   ```
-2. **Starting Characters:** Variables must start with either a letter, an underscore (`_`), or a dollar sign (`$`).
-   ```java
-   var age = 25;    // Valid
-   var _count = 5;  // Valid
-   var $price = 100;// Valid
-   // var 123age = 10; // INVALID (Cannot start with a digit)
-   ```
-3. **No Whitespace:** Variable names cannot contain whitespace/spaces.
-   ```java
-   // var my age = 20; // INVALID
-   var myAge = 20;     // Valid (CamelCase recommended)
-   ```
-4. **No Reserved Keywords:** Variable names cannot be a Java keyword.
-   ```java
-   // var class = 10; // INVALID ('class' is a reserved keyword)
-   var myClass = 10;   // Valid
-   ```
+## Variable Naming Rules
+1. **Case-Sensitive:** `age` and `AGE` are distinct.
+2. **Start Characters:** Must start with a letter, `_`, or `$`. Cannot start with digits.
+3. **No Whitespace:** Cannot contain spaces.
+4. **No Keywords:** Cannot use reserved keywords.
 
 ---
 
-# 8 Types of Primitive Data Types
+# 8 Primitive Data Types
 
-Data types specify the size and type of values that can be stored in a variable. Java has **8 primitive data types**:
-
-| Data Types | Size | Default Value | Explanation |
+| Data Type | Size | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `boolean` | 1 bit | `false` | Stores `true` or `false` values |
-| `byte` | 1 byte / 8 bits | `0` | Stores whole numbers from -128 to 127 |
-| `short` | 2 bytes / 16 bits | `0` | Stores whole numbers from -32,768 to 32,767 |
-| `int` | 4 bytes / 32 bits | `0` | Stores whole numbers from -2,147,483,648 to 2,147,483,647 |
-| `long` | 8 bytes / 64 bits | `0L` | Stores whole numbers from -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 |
-| `float` | 4 bytes / 32 bits | `0.0f` | Stores fractional numbers. Sufficient for storing 6 to 7 decimal digits |
-| `double` | 8 bytes / 64 bits | `0.0d` | Stores fractional numbers. Sufficient for storing 15 decimal digits |
-| `char` | 2 bytes / 16 bits | `'\u0000'` | Stores a single character/letter or ASCII values |
+| `boolean` | 1 bit | `false` | `true` or `false` |
+| `byte` | 1 byte | `0` | Whole numbers (-128 to 127) |
+| `short` | 2 bytes | `0` | Whole numbers (-32,768 to 32,767) |
+| `int` | 4 bytes | `0` | Whole numbers (-2.14B to 2.14B) |
+| `long` | 8 bytes | `0L` | Large whole numbers |
+| `float` | 4 bytes | `0.0f` | Single-precision decimals (6-7 digits) |
+| `double` | 8 bytes | `0.0d` | Double-precision decimals (15 digits) |
+| `char` | 2 bytes | `'\u0000'` | Single Unicode character |
 
 ---
 
-# Data Types Implicit Conversion (Direct / Widening)
+# Implicit Conversion (Widening)
 
-## Overview & Concept
-**Implicit Conversion** (also known as **Widening Conversion** or **Automatic Type Conversion**) happens automatically when a smaller data type is assigned to a larger data type. 
+Smaller data types automatically widen into larger types without data loss:
 
-### Bucket Analogy
-Think of data types as buckets of different sizes (`short` ➔ `int` ➔ `long`):
-- Pouring a smaller bucket (`short`) into a larger bucket (`int` / `long`) happens **automatically/implicitly** without overflowing.
-
----
-
-## Conversion Flow Diagram
-
-```mermaid
-flowchart TD
-    Byte["byte"] --> Short["short"]
-    Short --> Int["int"]
-    Char["char"] --> Int
-    Int --> Long["long"]
-    Int --> Float["float"]
-    Int --> Double["double"]
-    Long --> Float
-    Long --> Double
-    Float --> Double
-```
-
----
-
-## Conversion Hierarchy Order:
 `byte` ➔ `short` ➔ `int` ➔ `long` ➔ `float` ➔ `double`  
 `char` ➔ `int`
 
-### Code Example:
 ```java
 int numInt = 100;
-long numLong = numInt;      // Implicit widening: int (4 bytes) automatically converts to long (8 bytes)
-double numDouble = numLong; // Implicit widening: long (8 bytes) automatically converts to double
-var result = numDouble + 5; // Inferred as double
+long numLong = numInt;      // Automatic widening
+double numDouble = numLong; // Automatic widening
 ```
-

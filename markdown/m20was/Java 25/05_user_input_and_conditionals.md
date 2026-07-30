@@ -1,29 +1,79 @@
-# Taking User Input Using Scanner in Java
+# Taking User Input in Java
 
-In modern Java (Java 21 to Java 25+), we can write clean, top-level code using **Implicitly Declared Classes and Instance Main Methods** (JEP 463/495 / Flexible Main Methods).
+In Java, input is read from the user using `java.util.Scanner` or modern `IO.readln()` (Java 25).
 
-## Common `Scanner` Methods
+---
 
-| Method | Reads |
-| :--- | :--- |
-| `nextInt()` | An integer value |
-| `nextDouble()` | A double floating-point value |
-| `nextFloat()` | A float value |
-| `next()` | A single word (stops at space) |
-| `nextLine()` | An entire line of text (string) |
-| `nextBoolean()` | A boolean value (`true`/`false`) |
+# `Scanner` Class in Java
 
-### Modern Java 25 Code Example:
+The `Scanner` class (`java.util.Scanner`) parses primitive types and strings from `System.in`.
+
+## Common `Scanner` Methods for All Data Types
+
+| Data Type | Scanner Method | Description |
+| :--- | :--- | :--- |
+| `int` | `sc.nextInt()` | Reads integer numbers |
+| `double` | `sc.nextDouble()` | Reads double floating-point numbers |
+| `float` | `sc.nextFloat()` | Reads float numbers |
+| `long` | `sc.nextLong()` | Reads long whole numbers |
+| `boolean` | `sc.nextBoolean()` | Reads `true` or `false` |
+| `String` (Word) | `sc.next()` | Reads single word (stops at space) |
+| `String` (Line) | `sc.nextLine()` | Reads full sentence/line |
+| `char` | `sc.next().charAt(0)` | Reads single character |
+
+---
+
+## How `Scanner` Works
+
+```mermaid
+flowchart LR
+    A[Keyboard Input] -->|System.in| B[Scanner Parser]
+    B -->|sc.nextInt| C[Variable Allocation]
+```
+
+---
+
+## Modern Java 25 `Scanner` Code Example (All Data Types):
+
 ```java
 import java.util.Scanner;
 
 void main() {
     try (var sc = new Scanner(System.in)) {
-        print("Enter your age: ");
-        var age = sc.nextInt();
+        IO.print("Enter int age: ");
+        int age = sc.nextInt();
 
-        println("You are " + age + " years old.");
-    } // Scanner is automatically closed here via try-with-resources
+        IO.print("Enter double salary: ");
+        double salary = sc.nextDouble();
+
+        IO.print("Enter boolean isStudent (true/false): ");
+        boolean isStudent = sc.nextBoolean();
+
+        IO.print("Enter char gender (M/F): ");
+        char gender = sc.next().charAt(0);
+
+        sc.nextLine(); // Consume leftover newline character
+
+        IO.print("Enter full name: ");
+        String name = sc.nextLine();
+
+        IO.println("\n--- Summary ---");
+        IO.println("Name: " + name + ", Age: " + age);
+        IO.println("Salary: " + salary + ", Gender: " + gender + ", Student: " + isStudent);
+    }
+}
+```
+
+---
+
+# Java 25 Console Reading Alternative (`IO.readln()`)
+
+In Java 25, `IO.readln()` provides a clean alternative without declaring `Scanner`:
+No, `IO.readln()` **cannot take any data type directly**. It has one fixed rule: it **always returns a `String`**
+```java
+void main() {
+    var name = IO.readln("Enter name: ");
+    IO.println("Hello, " + name + "!");
 }
 ```
 
@@ -31,127 +81,71 @@ void main() {
 
 # Java Conditional Statements
 
-Conditional statements control the execution flow of a program based on boolean expressions (`true` or `false`).
-
 ```mermaid
 flowchart TD
-    Start([Start]) --> Condition{Is Condition True?}
-    Condition -->|Yes| TrueBranch[Execute If Block]
-    Condition -->|No| FalseBranch[Execute Else Block]
-    TrueBranch --> End([Continue Program Execution])
+    Start([Start]) --> Condition{Condition True?}
+    Condition -->|Yes| TrueBranch[If Block]
+    Condition -->|No| FalseBranch[Else Block]
+    TrueBranch --> End([Continue])
     FalseBranch --> End
 ```
 
----
-
-# Java `if - else` Statements
-
-Executes one block of code if the condition is `true`, and an alternative block if it is `false`.
-
-### Modern Java 25 Code Example:
+### `if - else` Statements
 ```java
 void main() {
     var number = 10;
-
     if (number % 2 == 0) {
-        println("Even number");
+        IO.println("Even");
     } else {
-        println("Odd number");
+        IO.println("Odd");
     }
 }
 ```
 
----
-
-# Java `if - else if - else` Statements
-
-Used to test multiple conditions sequentially.
-
-### Modern Java 25 Code Example:
+### `if - else if - else` Statements
 ```java
 void main() {
     var score = 85;
-
-    if (score >= 90) {
-        println("Grade: A");
-    } else if (score >= 80) {
-        println("Grade: B");
-    } else if (score >= 70) {
-        println("Grade: C");
-    } else {
-        println("Grade: F");
-    }
+    if (score >= 90) IO.println("Grade: A");
+    else if (score >= 80) IO.println("Grade: B");
+    else IO.println("Grade: F");
 }
 ```
 
----
-
-# Nested `if - else` Statements
-
-An `if` or `if-else` statement placed inside another `if` or `else` block.
-
-### Modern Java 25 Code Example:
+### Nested `if - else` Statements
 ```java
 void main() {
     var age = 20;
     var hasID = true;
 
     if (age >= 18) {
-        if (hasID) {
-            println("Entry Allowed");
-        } else {
-            println("ID required");
-        }
+        if (hasID) IO.println("Entry Allowed");
+        else IO.println("ID required");
     } else {
-        println("Underage - Entry Denied");
+        IO.println("Underage");
     }
 }
 ```
 
----
-
-# Java Ternary Operators
-
-A compact, single-line shorthand for an `if-else` block.
-
-### Syntax:
-$$\text{variable} = (\text{condition}) ? \text{expressionIfTrue} : \text{expressionIfFalse};$$
-
-### Modern Java 25 Code Example:
+### Ternary Operator (`?:`)
 ```java
 void main() {
-    var number = 7;
-    var result = (number % 2 == 0) ? "Even" : "Odd";
-    println(result); // Outputs: Odd
+    var age = 18;
+    var status = (age >= 18) ? "Adult" : "Minor";
+    IO.println(status);
 }
 ```
 
 ---
 
-# Modern Java `switch` Expressions & Arrow Rules (Java 14 - 25+)
+# Java 25 `switch` Expressions & Pattern Matching
 
-In modern Java, **Switch Expressions (`->`)** replace traditional colon syntax and `break` statements. Switch expressions:
-1. **Eliminate Fall-Through:** No `break` keywords required; only the matching case executes.
-2. **Can Return Values:** Switch can be assigned directly to variables.
-3. **Pattern Matching & Multiple Values:** Allows comma-separated case values and type pattern matching.
+Switch expressions (`->`) eliminate `break` statements and fall-through bugs, allowing direct value assignments and type pattern matching with `when` guards.
 
-## Switch Flow Diagram
-
-```mermaid
-flowchart TD
-    Value[Input Variable] --> Case1{Case 1?}
-    Case1 -->|Match| Exec1[Evaluate Expression & Return]
-    Case1 -->|No Match| Case2{Case 2?}
-    Case2 -->|Match| Exec2[Evaluate Expression & Return]
-    Case2 -->|No Match| Default[Default Expression]
-```
-
-### Modern Switch Expression Example (Returning Values):
 ```java
+// Switch Expression with Arrow Rules
 void main() {
     var day = 3;
-
-    // Modern Switch Expression assigning directly to variable
     var dayName = switch (day) {
         case 1 -> "Monday";
         case 2 -> "Tuesday";
@@ -159,24 +153,31 @@ void main() {
         case 4, 5 -> "Thursday or Friday";
         default -> "Weekend / Invalid day";
     };
-
-    println(dayName); // Outputs: Wednesday
+    IO.println(dayName);
 }
 ```
 
-### Modern Switch Statement with Arrow Rules (No `break` needed):
 ```java
-void main() {
-    var day = 2;
-
-    // Modern arrow rules without returning a value
-    switch (day) {
-        case 1 -> println("Monday");
-        case 2 -> println("Tuesday");
-        case 3 -> println("Wednesday");
-        default -> println("Other day");
+// Pattern Matching Switch with 'when' Guard
+void checkInput(Object val) {
+    switch (val) {
+        case Integer i when i >= 90 -> IO.println("High Score: " + i);
+        case Integer i              -> IO.println("Score: " + i);
+        case String s               -> IO.println("Text: " + s);
+        case null, default          -> IO.println("Unknown");
     }
 }
 ```
 
-> **Modern Java Advantage:** Arrow syntax (`case X ->`) guarantees no accidental **fall-through**, completely eliminating the need for `break` statements!
+```java
+// Record Pattern Destructuring in Switch
+record Point(int x, int y) {}
+
+void processShape(Object obj) {
+    switch (obj) {
+        case Point(int x, int y) when x == 0 && y == 0 -> IO.println("At Origin (0,0)");
+        case Point(int x, int y)                        -> IO.println("Point at (" + x + "," + y + ")");
+        default                                         -> IO.println("Not a point");
+    }
+}
+```
