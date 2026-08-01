@@ -29,6 +29,7 @@ Used when the number of iterations is known in advance.
 
 ### Modern Java 25 Code Example:
 ```java
+import static java.lang.IO.*;
 void main() {
     // Modern for loop with local variable type inference (var)
     for (var i = 1; i <= 5; i++) {
