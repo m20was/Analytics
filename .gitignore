@@ -13,9 +13,9 @@ wheels/
 .venv
 .env
 
-# Folders for data and outputs
+# Folders for data
+D:/Workspace/workspace/Analytics/data
 apps/Swiggy/data/
-apps/Swiggy/.data/
 
 # Generated learning outputs
 data/intermediate/profiles/*.json
