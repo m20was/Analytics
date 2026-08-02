@@ -13,6 +13,10 @@ wheels/
 .venv
 .env
 
+# Folders for data and outputs
+apps/Swiggy/data/
+apps/Swiggy/.data/
+
 # Generated learning outputs
 data/intermediate/profiles/*.json
 data/curated/profiles/*.json
