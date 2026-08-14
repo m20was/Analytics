@@ -18,5 +18,5 @@ dependencies = [
     "pyspark==4.2.0",
     "scikit-learn==1.9.0",
     "streamlit==1.59.2",
-    
+    "dbt-snowflake>=1.12.0",
 ]
