@@ -39,6 +39,22 @@ What this does:
 2. Creates `.venv` in this workspace.
 3. Installs all dependencies from `pyproject.toml`.
 
+### 3. Activate the Environment
+
+Activate the created virtual environment:
+*   **Windows (Command Prompt):**
+    ```cmd
+    .\.venv\Scripts\activate.bat
+    ```
+*   **Windows (PowerShell):**
+    ```powershell
+    .\.venv\Scripts\Activate.ps1
+    ```
+*   **macOS / Linux:**
+    ```bash
+    source .venv/bin/activate
+    ```
+
 ## Open And Run Notebooks
 
 1. Open any notebook from `notebooks/`.
