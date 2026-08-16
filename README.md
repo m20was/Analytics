@@ -14,46 +14,30 @@ Use this README as a setup and run guide.
 ## Prerequisites
 
 - Windows PowerShell or Command Prompt
-- Python 3.12
-- `uv` installed
+- Python 3.13
+- `uv` installed globally and available on `PATH`
 
-If `uv` is not installed yet:
+## Setup Workspace
 
-```powershell
-pip install uv
-```
+From the repository root:
 
-## Setup Workspace (First Time)
-
-Run these commands from the repository root:
-
-```powershell
-uv python install 3.12.10
-uv venv --python 3.12.10
+```cmd
+.\.venv\Scripts\activate.bat
 uv sync
 ```
 
-What this does:
+Or in PowerShell:
 
-1. Installs Python 3.12.10 (if missing).
-2. Creates `.venv` in this workspace.
-3. Installs all dependencies from `pyproject.toml`.
+```powershell
+.\.venv\Scripts\Activate.ps1
+uv sync
+```
 
-### 3. Activate the Environment
+If you prefer a simple Command Prompt helper, run:
 
-Activate the created virtual environment:
-*   **Windows (Command Prompt):**
-    ```cmd
-    .\.venv\Scripts\activate.bat
-    ```
-*   **Windows (PowerShell):**
-    ```powershell
-    .\.venv\Scripts\Activate.ps1
-    ```
-*   **macOS / Linux:**
-    ```bash
-    source .venv/bin/activate
-    ```
+```cmd
+.\scripts\bootstrap.cmd
+```
 
 ## Open And Run Notebooks
 
@@ -143,5 +127,13 @@ sql/
 - Add a new package: `uv add <package-name>`
 - Remove a package: `uv remove <package-name>`
 - Reinstall/sync all packages: `uv sync`
+
+Examples:
+
+```cmd
+uv pip show pandas
+uv pip show pyspark
+uv pip show sqlalchemy
+```
 
 `pyproject.toml` is the source of truth for dependencies.
