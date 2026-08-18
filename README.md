@@ -127,6 +127,7 @@ sql/
 - Add a new package: `uv add <package-name>`
 - Remove a package: `uv remove <package-name>`
 - Reinstall/sync all packages: `uv sync`
+- List installed packages in `.venv`: `uv pip list`
 
 Examples:
 
