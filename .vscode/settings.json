@@ -5,7 +5,29 @@
   "python.envFile": "${workspaceFolder}/.env",
   "jupyter.notebookFileRoot": "${workspaceFolder}",
   "terminal.integrated.env.windows": {
-    "PATH": "${workspaceFolder}/.venv/Scripts;${env:PATH}",
-    "VIRTUAL_ENV": "${workspaceFolder}/.venv"
+    "PATH": "${workspaceFolder}\\.venv\\Scripts;${workspaceFolder}/.venv/Scripts;${env:PATH}",
+    "VIRTUAL_ENV": "${workspaceFolder}\\.venv"
+  },
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "args": [
+        "-NoExit",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "if (Test-Path '${workspaceFolder}\\.venv\\Scripts\\Activate.ps1') { & '${workspaceFolder}\\.venv\\Scripts\\Activate.ps1' }"
+      ]
+    },
+    "Command Prompt": {
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ],
+      "args": [
+        "/k",
+        "if exist \"${workspaceFolder}\\.venv\\Scripts\\activate.bat\" \"${workspaceFolder}\\.venv\\Scripts\\activate.bat\""
+      ]
+    }
   }
 }
